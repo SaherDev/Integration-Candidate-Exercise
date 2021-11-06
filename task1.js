@@ -71,7 +71,7 @@ const replaceStaticPictures = (option, radius) => {
         videoEl.addEventListener("ended", function () {
           this.play();
         });
-        // option 2
+      
         // images[idx].style.display = "none";
         // images[idx].parentNode.appendChild(videoEl);
         images[idx].replaceWith(videoEl);
