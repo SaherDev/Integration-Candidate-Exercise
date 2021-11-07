@@ -71,7 +71,6 @@ const replaceStaticPictures = (option, radius) => {
         videoEl.addEventListener("ended", function () {
           this.play();
         });
-      
         // images[idx].style.display = "none";
         // images[idx].parentNode.appendChild(videoEl);
         images[idx].replaceWith(videoEl);
@@ -83,12 +82,24 @@ const replaceStaticPictures = (option, radius) => {
       //option 2
       for (let i = 0; i < images.length; i++) {
         images[i].addEventListener("mouseover", function () {
+          let founded = false;
           let divCirc = document.querySelectorAll("#divCirc");
-          for (c of divCirc) c.style.display = "none";
           let circle = createCircle(this, radius);
           circle.y += window.scrollY;
-          draw(circle);
 
+          for (c of divCirc) {
+            if (
+              c.style.top == `${circle.y}px` &&
+              c.style.left == `${circle.x}px`
+            ) {
+              c.style.display = "block";
+              founded = true;
+              continue;
+            }
+            c.style.display = "none";
+          }
+
+          if (!founded) draw(circle);
           let videoEl = createVideo(this.width, this.height);
           videoEl.addEventListener("mouseover", function () {
             this.play();
